@@ -1,14 +1,14 @@
 import axios from 'axios'
 import { config } from 'dotenv';
 import path from 'path';
-import { getTitle, queryString, correctArgCount } from './shared';
+import { correctArgCount, getTitle, queryString } from './shared';
 
 /**
- * Get a movies ID.
+ * Get a TV series ID.
  * 
- * @param {string} title The name of the Movie.
+ * @param {string} title The name of the TV Show.
  * 
- * @see https://developers.themoviedb.org/3/movies/get-movie-details
+ * @see https://developers.themoviedb.org/3/tv/get-tv-details
  */
 
 config({ path: path.resolve(__dirname, `../.env`) });
@@ -21,10 +21,9 @@ if (!title || !correctArgs)
     );
 
 const query = queryString(title);
-
 axios
   .get(
-    `https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_API_KEY}&query=${query}`
+    `https://api.themoviedb.org/3/search/tv?api_key=${process.env.TMDB_API_KEY}&query=${query}`
   )
     .then(({ data }) => {
         if (!data.results.length) {
